@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+ 
+body{
+    background: #f9f9f9;
+    min-height: 100vh;
+ /*   overflow-x: hidden; */
+}
+
+header{
+    position: absolute;
+    top: 0;
+    left:0;
+    width:100%;
+    padding: 30px 100px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    z-index: 100;
+    
+    
+} 
+
+.logo{
+    font-size: 2em;
+    color:#359381;
+    pointer-events: none;
+    z-index: 2;
+
+}
+
+.navigation {
+       position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 25px;
+    z-index: 1;
+}
+
+.navigation a{
+    text-decoration: none;
+    color: #359381;
+    padding: 6px 15px;
+    border-radius: 20px;
+    margin: 0 10px;
+    font-weight:600;
+    margin-left: 100 px;
+}
+
+.navigation a:hover,
+.navigation a.active{
+    background: #359381;
+    color: #f9f9f9;
+
+}
+
+.parallax {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; 
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5em;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);  
+    z-index: 10; 
+}
+
+.parallax img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;  
+    pointer-events: none;
+    z-index: 1; 
+}
+
+.sec{
+    position: relative;
+    background: #003329;
+    padding: 100px;
+}
+
+.sec h2{
+    font-size: 3em;
+    color: #fff;
+    margin-bottom:10px;
+}
+
+.sec p{
+    font-size: 1em;
+    color: #fff;
+    font-weight: 300;
+}
+
+
+.climate-section {
+    background: #f0fdf9;
+    padding: 80px 100px;
+    text-align: center;
+}
+
+.climate-section h2 {
+    font-size: 2.5em;
+    color: #1c5c4e;
+    margin-bottom: 20px;
+}
+
+.climate-section p {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.controls {
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 10px 15px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}

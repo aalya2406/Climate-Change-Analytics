@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Scrolling Website Nature | Aalya </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<body>
+
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+            <a href="#" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="#">Service</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <section class="parallax">
+       
+        <img src="hill1.png" id="hill1">
+        <img src="hill2.png" id="hill2">
+        <img src="hill3.png" id="hill3">
+        <img src="hill4.png" id="hill4">
+        <img src="hill5.png" id="hill5">
+        <img src="tree.png" id="tree">
+         <h2 id="text"> Aalya Vora</h2>
+        <img src="leaf.png" id="leaf">
+        <img src="plant.png" id="plant">
+    </section>
+
+    <section class="sec">
+        <h2>This website can scroll</h2>
+        <p>
+            Aalya Vora is a passionate software engineer and creative thinker with a strong foundation in both Computer Science and Economics. She brings a unique blend of analytical rigor and artistic problem-solving to every project, whether it's designing sleek user interfaces or optimizing backend performance. Aalya thrives at the intersection of technology and impact, always eager to learn and innovate.<br><br> 
+            During her time at the University of Massachusetts Amherst, Aalya engaged in cross-disciplinary research, developed full-stack web applications, and held leadership roles in student organizations. Her experience ranges from building AI-driven tools to managing technical teams in dynamic environments. With hands-on skills in React, Node.js, Python, and cloud deployment, she’s always excited to tackle new technical challenges.<br><br>
+            Outside of coding, Aalya is deeply involved in her community — serving as the treasurer of her sorority and as Production Coordinator for UVC-TV. Whether she’s mentoring peers, coordinating content, or experimenting with generative AI, Aalya consistently demonstrates curiosity, reliability, and leadership. Her ultimate goal is to build software that is both meaningful and accessible.<br><br>
+  </p>
+        </p>
+    </section>
+
+    <section class="climate-section">
+  <h2>Climate Change Dashboard</h2>
+  <p>Explore global climate trends using real-time data.</p>
+
+  <div class="controls">
+    <label for="climateMetric">Select a metric:</label>
+    <select id="climateMetric">
+        <option value="co2">CO₂ Levels</option>
+        <option value="temperature">Temperature Anomalies</option>
+        <option value="sea">Sea Level Rise</option>
+    </select>
+
+  </div>
+
+  <canvas id="climateChart" width="400" height="200"></canvas>
+</section>
+
+
+    
+
+    <script src="script.js"></script>
+</body>
+
+</html>
