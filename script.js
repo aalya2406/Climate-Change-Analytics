@@ -82,7 +82,7 @@ const mockClimateData = {
     }
 };
 
-// 📈 Update Chart Based on Dropdown Selection
+// Update Chart Based on Dropdown Selection
 function updateClimateChart(metric) {
     if (metric === 'temperature') {
         fetchTemperatureData();
@@ -95,13 +95,13 @@ function updateClimateChart(metric) {
     }
 }
 
-// 📌 Get Dropdown Reference
+// Get Dropdown Reference
 const metricSelector = document.getElementById('climateMetric');
 
-// 📌 Event Listener for Dropdown
+// Event Listener for Dropdown
 metricSelector.addEventListener('change', () => {
     updateClimateChart(metricSelector.value);
 });
 
-// 🚀 Load Temperature on Page Start
+//  Load Temperature on Page Start
 updateClimateChart('temperature');
