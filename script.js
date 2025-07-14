@@ -105,3 +105,119 @@ metricSelector.addEventListener('change', () => {
 
 //  Load Temperature on Page Start
 updateClimateChart('temperature');
+
+// 🌍 Location-based data loading
+document.getElementById('loadData').addEventListener('click', () => {
+  const locationInput = document.getElementById('location').value.trim();
+  const [lat, lng] = locationInput.split(',').map(Number);
+  const selectedMetric = document.getElementById('climateMetric').value;
+
+  if (!locationInput || isNaN(lat) || isNaN(lng)) {
+    alert("Enter valid coordinates (e.g. 40.71,-74.01)");
+    return;
+  }
+
+  if (selectedMetric === 'temperature') {
+    fetchTemperatureDataByCoords(lat, lng);
+  } else if (selectedMetric === 'co2') {
+    fetchCO2DataByCoords(lat, lng);
+  } else if (selectedMetric === 'sea') {
+    fetchSeaLevelDataByCoords(lat, lng);
+  }
+});
+
+
+async function fetchTemperatureDataByCoords(lat, lng) {
+  try {
+    const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lng}&start_date=2020-01-01&end_date=2022-12-31&model=CMCC_CM2_VHR4&daily=temperature_2m_max`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Location-based API data:", data);
+
+    if (!data.daily || !data.daily.time || !data.daily.temperature_2m_max) {
+      throw new Error("Unexpected API response format");
+    }
+
+    const dates = data.daily.time;
+    const temps = data.daily.temperature_2m_max;
+
+    climateChart.data.labels = dates;
+    climateChart.data.datasets[0].label = `Max Temp (°C) @ ${lat},${lng}`;
+    climateChart.data.datasets[0].data = temps;
+    climateChart.update();
+  } catch (error) {
+    console.error("Error fetching location data:", error);
+    alert("Could not load data for that location.");
+  }
+}
+
+async function fetchCO2DataByCoords(lat, lng) {
+  try {
+    const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lng}&start_date=2015-01-01&end_date=2023-12-31&model=EC_Earth3P_HR&yearly=co2`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("CO2 data:", data);
+
+    if (!data.yearly?.time || !data.yearly?.co2) {
+      throw new Error("Unexpected CO₂ response format");
+    }
+
+    climateChart.data.labels = data.yearly.time;
+    climateChart.data.datasets[0].label = `CO₂ (ppm) @ ${lat},${lng}`;
+    climateChart.data.datasets[0].data = data.yearly.co2;
+    climateChart.update();
+  } catch (error) {
+    console.error("CO₂ error:", error);
+    alert("Could not load CO₂ data.");
+  }
+}
+
+async function fetchSeaLevelDataByCoords(lat, lng) {
+  try {
+    const url = `https://climate-api.open-meteo.com/v1/climate?latitude=${lat}&longitude=${lng}&start_date=2000-01-01&end_date=2022-12-31&model=MPI_ESM1_2_XR&yearly=sea_level`;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Sea level data:", data);
+
+    if (!data.yearly?.time || !data.yearly?.sea_level) {
+      throw new Error("Unexpected sea level format");
+    }
+
+    climateChart.data.labels = data.yearly.time;
+    climateChart.data.datasets[0].label = `Sea Level (mm) @ ${lat},${lng}`;
+    climateChart.data.datasets[0].data = data.yearly.sea_level;
+    climateChart.update();
+  } catch (error) {
+    console.error("Sea level error:", error);
+    alert("Could not load sea level data.");
+  }
+}
+
+async function fetchTemperatureForecast(lat, lng) {
+  try {
+    const url = `http://localhost:5000/api/forecast/${lat}/${lng}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    climateChart.data.labels = data.future_dates;
+    climateChart.data.datasets[0].label = `Forecast Temp (°C) @ ${lat},${lng}`;
+    climateChart.data.datasets[0].data = data.forecast;
+    climateChart.update();
+  } catch (err) {
+    console.error("Forecast error:", err);
+    alert("Could not generate forecast.");
+  }
+}
+
+document.getElementById('forecastBtn').addEventListener('click', () => {
+  const locationInput = document.getElementById('location').value.trim();
+  const [lat, lng] = locationInput.split(',').map(Number);
+
+  if (!locationInput || isNaN(lat) || isNaN(lng)) {
+    alert("Enter valid coordinates (e.g. 40.71,-74.01)");
+    return;
+  }
+
+  fetchTemperatureForecast(lat, lng);
+});
+

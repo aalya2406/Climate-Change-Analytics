@@ -48,3 +48,41 @@ def get_climate_data():
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
+@app.route("/api/forecast/<float:lat>/<float:lng>")
+def forecast_temperature(lat, lng):
+    url = "https://climate-api.open-meteo.com/v1/climate"
+    params = {
+        "latitude": lat,
+        "longitude": lng,
+        "start_date": "2010-01-01",
+        "end_date": "2023-12-31",
+        "model": "CMCC_CM2_VHR4",
+        "daily": "temperature_2m_max"
+    }
+
+    responses = client.weather_api(url, params=params)
+    response = responses[0]
+    daily = response.Daily()
+
+    dates = pd.date_range(
+        start=pd.to_datetime(daily.Time(), unit="s", utc=True),
+        end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True),
+        freq=pd.Timedelta(seconds=daily.Interval()),
+        inclusive="left"
+    )
+    temps = pd.Series(daily.Variables(0).ValuesAsNumpy(), index=dates)
+
+    # Optional: smooth or resample (e.g., monthly average)
+    temps = temps.resample("M").mean()
+
+    # Forecasting with ARIMA or Prophet
+    from statsmodels.tsa.arima.model import ARIMA
+    model = ARIMA(temps, order=(5, 1, 0))
+    fitted = model.fit()
+    forecast = fitted.forecast(steps=12)
+
+    return jsonify({
+        "future_dates": [d.strftime("%Y-%m-%d") for d in forecast.index],
+        "forecast": forecast.tolist()
+    })

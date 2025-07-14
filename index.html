@@ -15,7 +15,7 @@
 <body>
 
     <header>
-        <h2 class="logo">Logo</h2>
+        <h2 class="logo">Aalya Vora</h2>
         <nav class="navigation">
             <a href="#" class="active">Home</a>
             <a href="#">About</a>
@@ -32,17 +32,18 @@
         <img src="hill4.png" id="hill4">
         <img src="hill5.png" id="hill5">
         <img src="tree.png" id="tree">
-         <h2 id="text"> Aalya Vora</h2>
+         <h2 id="text"> Climate Change</h2>
         <img src="leaf.png" id="leaf">
         <img src="plant.png" id="plant">
     </section>
 
     <section class="sec">
-        <h2>This website can scroll</h2>
+        <h2>About</h2>
         <p>
             Aalya Vora is a passionate software engineer and creative thinker with a strong foundation in both Computer Science and Economics. She brings a unique blend of analytical rigor and artistic problem-solving to every project, whether it's designing sleek user interfaces or optimizing backend performance. Aalya thrives at the intersection of technology and impact, always eager to learn and innovate.<br><br> 
             During her time at the University of Massachusetts Amherst, Aalya engaged in cross-disciplinary research, developed full-stack web applications, and held leadership roles in student organizations. Her experience ranges from building AI-driven tools to managing technical teams in dynamic environments. With hands-on skills in React, Node.js, Python, and cloud deployment, she’s always excited to tackle new technical challenges.<br><br>
             Outside of coding, Aalya is deeply involved in her community — serving as the treasurer of her sorority and as Production Coordinator for UVC-TV. Whether she’s mentoring peers, coordinating content, or experimenting with generative AI, Aalya consistently demonstrates curiosity, reliability, and leadership. Her ultimate goal is to build software that is both meaningful and accessible.<br><br>
+            Motivated by a desire to use technology for social good, Aalya built an interactive Climate Change Analytics Dashboard to raise awareness about global environmental trends. By combining real-time climate data with intuitive visualizations, she aimed to make complex information more accessible to the public. This project reflects her commitment to using her technical skills to address urgent, real-world challenges—blending creativity, research, and frontend design to inspire action through data.<br><br>
   </p>
         </p>
     </section>
@@ -62,6 +63,17 @@
   </div>
 
   <canvas id="climateChart" width="400" height="200"></canvas>
+
+ <div class="location-input">
+  <label for="location">Enter location (lat,lng):</label>
+  <input type="text" id="location" placeholder="e.g. 40.71,-74.01 for NYC" />
+  <button id="loadData">Load Data</button>
+
+  <div class="forecast">
+    <button id="forecastBtn">Predict Future Temperature</button>
+  </div>
+</div>
+
 </section>
 
 
